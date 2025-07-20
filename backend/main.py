@@ -7,11 +7,19 @@ from database import Base, engine, get_db
 from models import User, Transaction, Log
 from schemas import UserCreate, UserOut, TransactionCreate, TransactionOut, LogOut
 from auth import get_password_hash, authenticate_user, create_access_token, get_current_user
-
+from fastapi.middleware.cors import CORSMiddleware
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="E-commerce Transaction API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or specify your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Helper function to log actions
 def log_action(db: Session, user_id: int, action: str, detail: str = None):

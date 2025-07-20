@@ -10,7 +10,7 @@ env_path = BASE_DIR / ".env"
 load_dotenv(dotenv_path=env_path)
 
 # Get the database URL from environment
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:pass@localhost:5432/ecommerce_db")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:12345@localhost:5432/ecommerce_db")
 
 # SQLAlchemy setup
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
